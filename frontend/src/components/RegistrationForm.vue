@@ -1,9 +1,9 @@
 <template>
-  <div id="reg_form">
-    <StepOne v-if="step === 1" @next="nextStep"/>
-    <StepTwo v-if="step === 2" @next="nextStep" @prev="prevStep"/>
-    <StepThree v-if="step === 3" @next="nextStep" @prev="prevStep"/>
-    <StepFour v-if="step === 4" @prev="prevStep" @submit="submitForm"/>
+  <div id="registration-form">
+    <StepOne v-if="step === 1" :formData="formData" @next="nextStep" @update="updateFormData"/>
+    <StepTwo v-if="step === 2" :formData="formData" @next="nextStep" @prev="prevStep" @update="updateFormData"/>
+    <StepThree v-if="step === 3" :formData="formData" @next="nextStep" @prev="prevStep" @update="updateFormData"/>
+    <StepFour v-if="step === 4" :formData="formData" @prev="prevStep" @submit="submitForm"/>
   </div>
 </template>
 
@@ -15,6 +15,19 @@ import StepThree from './Step3.vue'
 import StepFour from './Step4.vue'
 
 const step = ref(1)
+const formData = ref({
+  email: '',
+  tipo: 'PF',
+  nome: '',
+  cpf: '',
+  dataNascimento: '',
+  telefone: '',
+  razaoSocial: '',
+  cnpj: '',
+  dataAbertura: '',
+  telefoneEmpresa: '',
+  senha: ''
+})
 
 const nextStep = () => {
   step.value++
@@ -24,11 +37,27 @@ const prevStep = () => {
   step.value--
 }
 
+const updateFormData = (data) => {
+  formData.value = { ...formData.value, ...data }
+}
+
 const submitForm = () => {
-  // Lógica de submissão do formulário
+  fetch('url_da_api', {
+    method: 'POST',
+    body: JSON.stringify(formData.value),
+    headers: { 'Content-Type': 'application/json' }
+  }).then(response => {
+    if (response.ok) {
+      // Exibir mensagem de sucesso
+    } else {
+      // Exibir mensagem de erro
+    }
+  }).catch(error => {
+    // Exibir mensagem de erro
+  })
 }
 </script>
 
 <style scoped>
-/* Estilos globais */
+/* Estilos do componente */
 </style>
