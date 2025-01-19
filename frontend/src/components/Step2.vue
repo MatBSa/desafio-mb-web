@@ -174,16 +174,19 @@ h2 {
 label {
   margin-top: 15px;
   color: #333;
+  text-align: left;
+  display: block;
 }
 
 .form-group {
   margin-bottom: 15px;
+  width: 100%;
 }
 
 input[type="text"],
 input[type="date"],
 input[type="tel"] {
-  width: 100%;
+  width: 248px;
   max-width: 400px;
   margin-top: 5px;
   padding: 10px;
@@ -208,11 +211,11 @@ input[type="tel"]:focus {
 
 .back-button,
 .continue-button {
-  width: 48%;
+  width: 100%;
   max-width: 400px;
   margin-top: 20px;
   padding: 10px;
-  border: 1px solid #242424;
+  border: 2px solid orange;
   border-radius: 5px;
   background-color: orange;
   color: white;
@@ -220,9 +223,26 @@ input[type="tel"]:focus {
   text-align: center;
 }
 
+.back-button {
+  background-color: white;
+  color: orange;
+  margin-right: 0.5rem;
+}
+
+.continue-button {
+    margin-left: 0.5rem;
+}
+
 .continue-button:hover,
 .back-button:hover {
   background-color: darkorange;
+  border-color: darkorange;
+}
+
+.back-button:hover {
+  background-color: white;
+  color: darkorange;
+  border-color: darkorange;
 }
 
 .error {

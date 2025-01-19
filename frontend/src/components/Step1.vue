@@ -97,7 +97,8 @@ input[type="email"] {
   padding: 10px;
   border: 1px solid #242424;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
+  color: black;
 }
 
 input[type="email"]:focus {
