@@ -3,7 +3,7 @@
     <label>Etapa <span class="step-number">3</span> de 4</label>
     <h2>Senha de acesso</h2>
     <label for="senha">Sua senha</label>
-    <input type="password" id="senha" v-model="senha" placeholder="Insira sua senha"/>
+    <input type="password" id="senha" v-model="localFormData.senha" placeholder="Insira sua senha"/>
     <span v-if="senhaError" class="error">{{ senhaError }}</span>
     <div class="buttons">
       <button @click="prevStep" class="back-button">Voltar</button>
@@ -14,26 +14,31 @@
 
 <script setup>
 import { ref } from 'vue'
-const emit = defineEmits(['next', 'prev'])
-const senha = ref('')
+
+const props = defineProps(['formData'])
+const emit = defineEmits(['next', 'prev', 'update'])
+const localFormData = ref({ ...props.formData })
+
 const senhaError = ref('')
 
 const nextStep = () => {
   if (validateForm()) {
+    emit('update', localFormData.value)
     emit('next')
   }
 }
 
 const prevStep = () => {
+  emit('update', localFormData.value)
   emit('prev')
 }
 
 const validateForm = () => {
-  if (!senha.value) {
+  if (!localFormData.value.senha) {
     senhaError.value = 'Por favor, insira sua senha.'
     return false
-  } else if (senha.value.length < 6) {
-    senhaError.value = 'A senha deve ter pelo menos 6 caracteres.'
+  } else if (localFormData.value.senha.length < 8) {
+    senhaError.value = 'A senha deve ter pelo menos 8 caracteres.'
     return false
   } else {
     senhaError.value = ''
