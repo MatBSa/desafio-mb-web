@@ -1,7 +1,7 @@
 <template>
   <div class="step-one">
-    <h2>Etapa 1 de 4</h2>
-    <h3>Seja bem vindo(a)</h3>
+    <label>Etapa <span class="step-number">1</span> de 4</label>
+    <h2>Seja bem vindo(a)</h2>
     <label for="email">Endereço de e-mail</label>
     <input type="email" id="email" v-model="email" placeholder="Insira seu e-mail"/>
     <span v-if="emailError" class="error">{{ emailError }}</span>
@@ -68,9 +68,13 @@ const validateEmail = (email) => {
   padding: 20px;
 }
 
-h2, h3 {
+h2 {
   text-align: left;
   color: #333;
+}
+
+.step-number {
+  color: orange;
 }
 
 label {
@@ -78,9 +82,18 @@ label {
   color: #333;
 }
 
-input[type="email"],
+input[type="email"] {
+  width: 248px;
+  max-width: 400px;
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
 .continue-button {
-  width: 100%;
+  width: 270px;
   max-width: 400px;
   margin-top: 5px;
   padding: 10px;
@@ -126,7 +139,11 @@ input[type="email"],
     padding: 10px;
   }
 
-  input[type="email"],
+  input[type="email"] {
+    width: 90%;
+    max-width: 100%;
+  }
+  
   .continue-button {
     width: 100%;
     max-width: 100%;
