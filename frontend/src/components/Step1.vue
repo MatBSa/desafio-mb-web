@@ -4,12 +4,14 @@
     <h3>Seja bem vindo(a)</h3>
     <label for="email">Endereço de e-mail</label>
     <input type="email" id="email" v-model="email" placeholder="Insira seu e-mail"/>
+    <span v-if="emailError" class="error">{{ emailError }}</span>
     <div class="radio-group">
       <input type="radio" id="pf" value="PF" v-model="tipo"/>
       <label for="pf">Pessoa física</label>
       <input type="radio" id="pj" value="PJ" v-model="tipo"/>
       <label for="pj">Pessoa jurídica</label>
     </div>
+    <span v-if="tipoError" class="error">{{ tipoError }}</span>
     <button @click="nextStep" class="continue-button">Continuar</button>
   </div>
 </template>
@@ -19,6 +21,8 @@ import { ref } from 'vue'
 
 const email = ref('')
 const tipo = ref('PF')
+const emailError = ref('')
+const tipoError = ref('')
 
 const nextStep = () => {
   if (validateForm()) {
@@ -27,7 +31,32 @@ const nextStep = () => {
 }
 
 const validateForm = () => {
-  // Lógica de validação do formulário
+  let valid = true
+  
+  if (!email.value) {
+    emailError.value = 'Por favor, insira seu e-mail.'
+    valid = false
+  } else if (!validateEmail(email.value)) {
+    emailError.value = 'Por favor, insira um e-mail válido.'
+    valid = false
+  } else {
+    emailError.value = ''
+  }
+  
+  if (!tipo.value) {
+    tipoError.value = 'Por favor, selecione o tipo de cadastro.'
+    valid = false
+  } else {
+    tipoError.value = ''
+  }
+  
+  return valid
+}
+
+const validateEmail = (email) => {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\.,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,})$/
+  
+  return re.test(String(email).toLowerCase())
 }
 </script>
 
@@ -68,6 +97,12 @@ input[type="email"] {
 
 .radio-group input {
   margin: 0 10px;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
 }
 
 .continue-button {
