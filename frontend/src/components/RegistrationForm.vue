@@ -50,12 +50,12 @@ const submitForm = () => {
     }
   }).then(response => {
     if (response.ok) {
-      // Exibir mensagem de sucesso
+      alert('Cadastro Realizado', 'Seus dados foram cadastrados com sucesso.')
     } else {
-      // Exibir mensagem de erro
+      alert('Erro de Cadastro', 'Houve um problema ao cadastrar seus dados.')
     }
   }).catch(error => {
-    // Exibir mensagem de erro
+    alert('Erro de Cadastro', 'Houve um problema ao cadastrar seus dados.')
   })
 }
 </script>
