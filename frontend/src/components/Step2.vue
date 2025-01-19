@@ -94,9 +94,12 @@ const validateForm = () => {
     } else {
       nomeError.value = ''
     }
-    
+
     if (!localFormData.value.cpf) {
       cpfError.value = 'Por favor, insira seu CPF.'
+      valid = false
+    } else if (!isValidCPF(localFormData.value.cpf)) {
+      cpfError.value = 'CPF inválido.'
       valid = false
     } else {
       cpfError.value = ''
@@ -105,12 +108,18 @@ const validateForm = () => {
     if (!localFormData.value.dataNascimento) {
       dataNascimentoError.value = 'Por favor, insira sua data de nascimento.'
       valid = false
+    } else if (!isValidDate(localFormData.value.dataNascimento)) {
+      dataNascimentoError.value = 'Data de nascimento inválida.'
+      valid = false
     } else {
       dataNascimentoError.value = ''
     }
-    
+
     if (!localFormData.value.telefone) {
       telefoneError.value = 'Por favor, insira seu telefone.'
+      valid = false
+    } else if (!isValidPhone(localFormData.value.telefone)) {
+      telefoneError.value = 'Telefone inválido.'
       valid = false
     } else {
       telefoneError.value = ''
@@ -122,9 +131,12 @@ const validateForm = () => {
     } else {
       razaoSocialError.value = ''
     }
-    
+
     if (!localFormData.value.cnpj) {
       cnpjError.value = 'Por favor, insira o CNPJ.'
+      valid = false
+    } else if (!isValidCNPJ(localFormData.value.cnpj)) {
+      cnpjError.value = 'CNPJ inválido.'
       valid = false
     } else {
       cnpjError.value = ''
@@ -133,6 +145,9 @@ const validateForm = () => {
     if (!localFormData.value.dataAbertura) {
       dataAberturaError.value = 'Por favor, insira a data de abertura da empresa.'
       valid = false
+    } else if (!isValidDate(localFormData.value.dataAbertura)) {
+      dataAberturaError.value = 'Data de abertura inválida.'
+      valid = false
     } else {
       dataAberturaError.value = ''
     }
@@ -140,12 +155,39 @@ const validateForm = () => {
     if (!localFormData.value.telefoneEmpresa) {
       telefoneEmpresaError.value = 'Por favor, insira o telefone da empresa.'
       valid = false
+    } else if (!isValidPhone(localFormData.value.telefoneEmpresa)) {
+      telefoneEmpresaError.value = 'Telefone inválido.'
+      valid = false
     } else {
       telefoneEmpresaError.value = ''
     }
   }
 
   return valid
+}
+
+const isValidDate = (dateString) => {
+  const regEx = /^\d{4}-\d{2}-\d{2}$/
+  if (!dateString.match(regEx)) return false // Invalid format
+  const d = new Date(dateString)
+  const dNum = d.getTime()
+  if (!dNum && dNum !== 0) return false // NaN value, Invalid date
+  return d.toISOString().slice(0, 10) === dateString
+}
+
+const isValidCPF = (cpf) => {
+  const regEx = /^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/
+  return regEx.test(cpf)
+}
+
+const isValidCNPJ = (cnpj) => {
+  const regEx = /^\d{14}$|^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/
+  return regEx.test(cnpj)
+}
+
+const isValidPhone = (phone) => {
+  const regEx = /^\d{10,11}$|^\(\d{2}\)\s\d{4,5}-\d{4}$/
+  return regEx.test(phone)
 }
 
 watchEffect(() => {
