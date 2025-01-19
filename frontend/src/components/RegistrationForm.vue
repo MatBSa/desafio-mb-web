@@ -61,5 +61,5 @@ const submitForm = () => {
 </script>
 
 <style scoped>
-/* Estilos do componente */
+
 </style>

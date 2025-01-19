@@ -49,13 +49,13 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const { email, type, ...rest } = req.body;
+    const { email, tipo, ...rest } = req.body;
 
-    if (!email || !type) {
+    if (!email || !tipo) {
         return res.status(400).json({ error: 'Campos obrigatórios ausentes no passo 1.' });
     }
 
-    const requiredFields = type === 'PF' ? ['name', 'cpf', 'birthdate', 'phone'] : ['businessName', 'cnpj', 'openingDate', 'phone'];
+    const requiredFields = tipo === 'PF' ? ['nome', 'cpf', 'dataNascimento', 'telefone', 'senha'] : ['razaoSocial', 'cnpj', 'dataAbertura', 'telefoneEmpresa', 'senha'];
     const missingFields = requiredFields.filter((field) => !rest[field]);
 
     if (missingFields.length > 0) {
