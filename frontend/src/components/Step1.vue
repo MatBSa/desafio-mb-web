@@ -64,15 +64,13 @@ const validateEmail = (email) => {
 .step-one {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  padding: 20px;
 }
 
-h2 {
+h2, h3 {
+  text-align: left;
   color: #333;
-}
-
-h3 {
-  color: #666;
 }
 
 label {
@@ -80,23 +78,29 @@ label {
   color: #333;
 }
 
-input[type="email"] {
+input[type="email"],
+.continue-button {
+  width: 100%;
+  max-width: 400px;
   margin-top: 5px;
   padding: 10px;
-  width: 300px;
-  border: 1px solid #ccc;
+  border: 1px solid #242424;
   border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 .radio-group {
   display: flex;
-  justify-content: center;
   align-items: center;
   margin-top: 15px;
 }
 
 .radio-group input {
-  margin: 0 10px;
+  margin: 0 10px 0 0;
+}
+
+.radio-group label {
+  margin: 0 20px 0 5px;
 }
 
 .error {
@@ -107,15 +111,25 @@ input[type="email"] {
 
 .continue-button {
   margin-top: 20px;
-  padding: 10px 20px;
   background-color: orange;
   border: none;
-  border-radius: 5px;
   color: white;
   cursor: pointer;
 }
 
 .continue-button:hover {
   background-color: darkorange;
+}
+
+@media (max-width: 600px) {
+  .step-one {
+    padding: 10px;
+  }
+
+  input[type="email"],
+  .continue-button {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 </style>
