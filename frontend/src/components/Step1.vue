@@ -71,6 +71,7 @@ const validateEmail = (email) => {
 h2 {
   text-align: left;
   color: #333;
+  margin-top: 0rem;
 }
 
 .step-number {
