@@ -100,6 +100,11 @@ input[type="email"] {
   background-color: #f9f9f9;
 }
 
+input[type="email"]:focus {
+  border-color: lightorange;
+  outline: none;
+}
+
 .continue-button {
   width: 270px;
   max-width: 400px;
