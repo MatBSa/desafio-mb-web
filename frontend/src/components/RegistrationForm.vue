@@ -42,10 +42,12 @@ const updateFormData = (data) => {
 }
 
 const submitForm = () => {
-  fetch('url_da_api', {
+  fetch(import.meta.env.VITE_API_URL, {
     method: 'POST',
     body: JSON.stringify(formData.value),
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json'
+    }
   }).then(response => {
     if (response.ok) {
       // Exibir mensagem de sucesso

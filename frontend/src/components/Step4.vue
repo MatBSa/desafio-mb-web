@@ -46,21 +46,6 @@ const prevStep = () => {
 }
 const submitForm = () => {
   emit('submit')
-  fetch('url_da_api', {
-    method: 'POST',
-    body: JSON.stringify(props.formData),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(response => {
-    if (response.ok) {
-      // Exibir mensagem de sucesso
-    } else {
-      // Exibir mensagem de erro
-    }
-  }).catch(error => {
-    // Exibir mensagem de erro
-  })
 }
 </script>
 
