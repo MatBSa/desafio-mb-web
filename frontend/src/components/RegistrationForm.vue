@@ -42,7 +42,7 @@ const updateFormData = (data) => {
 }
 
 const submitForm = () => {
-  fetch(import.meta.env.VITE_API_URL, {
+  fetch('http://localhost:3000/registration', {
     method: 'POST',
     body: JSON.stringify(formData.value),
     headers: {
