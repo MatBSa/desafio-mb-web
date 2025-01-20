@@ -1,17 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
-let storedData = []; // Array to store the registered data
 
-router.get('/', (req, res) => {
-    res.status(200).json(storedData);
+let storedData = [];
+
+router.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontend/dist', 'index.html'));
 });
 
 router.post('/', (req, res) => {
     const { email, tipo, ...rest } = req.body;
 
     if (!email || !tipo) {
-        return res.status(400).json({ error: 'Campos obrigatórios ausentes no passo 1.' });
+        return res.status(400).json({ error: 'Campos obrigatórios ausentes' });
     }
 
     const requiredFields = tipo === 'PF' ? ['nome', 'cpf', 'dataNascimento', 'telefone', 'senha'] : ['razaoSocial', 'cnpj', 'dataAbertura', 'telefoneEmpresa', 'senha'];
