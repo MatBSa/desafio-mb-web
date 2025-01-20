@@ -3,8 +3,6 @@ const router = express.Router();
 const path = require('path');
 
 
-let storedData = [];
-
 router.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontend/dist', 'index.html'));
 });
@@ -24,7 +22,6 @@ router.post('/', (req, res) => {
     }
 
     const registeredData = { email, tipo, ...rest };
-    storedData.push(registeredData);
 
     res.status(200).json({ message: 'Cadastro realizado com sucesso!', registeredData });
 });
